@@ -1,0 +1,33 @@
+{
+    "name": "Python Web App",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": { 
+            "VARIANT": "3.8",
+            "INSTALL_NODE": "true"
+        }
+    },
+
+    "settings": { 
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+
+    "extensions": [
+        "github.vscode-pull-request-github",
+        "github.github-vscode-theme",
+        "github.copilot",
+        "github.codespaces",
+        "github.remotehub",
+        "github.vscode-codeql",
+        "github.vscode-discussions",
+        "github.vscode-markdown-preview-github-styles",
+        "github.vscode-remote-containers"
+    ],
+
+    "forwardPorts": [5000],
+
+    "postCreateCommand": "pip install -r requirements.txt",
+
+    "remoteUser": "vscode"
+}
