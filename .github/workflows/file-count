@@ -1,0 +1,15 @@
+name: Count Files
+on: 
+  workflow_dispatch:
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Count files
+      run: |
+        file_count=$(find . -type f | wc -l)
+        echo "There are $file_count files in the repository."
