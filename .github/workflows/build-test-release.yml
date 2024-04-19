@@ -1,0 +1,52 @@
+name: Build, Package and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Tests
+      run: python -m unittest
+
+    - name: Build Docker image
+      run: docker build -t my-python-app .devcontainer/
+
+    - name: Run Docker image
+      run: docker run -d -p 5000:5000 my-python-app
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: ./my-python-app.tar.gz
+        asset_name: my-python-app.tar.gz
+        asset_content_type: application/gzip
