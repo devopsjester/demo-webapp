@@ -3,16 +3,15 @@
     "build": {
         "dockerfile": "Dockerfile",
         "context": "..",
-        "args": { 
+        "args": {
             "VARIANT": "3.8",
             "INSTALL_NODE": "true"
         }
     },
-
-    "settings": { 
-        "terminal.integrated.shell.linux": "/bin/bash"
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "terminal.integrated.defaultProfile.linux": "bash"
     },
-
     "extensions": [
         "github.vscode-pull-request-github",
         "github.github-vscode-theme",
@@ -24,10 +23,9 @@
         "github.vscode-markdown-preview-github-styles",
         "github.vscode-remote-containers"
     ],
-
-    "forwardPorts": [5000],
-
+    "forwardPorts": [
+        5000
+    ],
     "postCreateCommand": "pip install -r requirements.txt",
-
     "remoteUser": "vscode"
 }
