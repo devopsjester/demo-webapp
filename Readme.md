@@ -5,7 +5,7 @@
 
 # Python Flask web application
 
-Sample Python Flask web application built using Visual Studio 2017.
+Sample Python Flask web application built using Visual Studio 2017!
 
 ## License:
 
